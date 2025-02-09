@@ -1,2 +1,5 @@
 eel
 injector
+langchain-openai
+langchain
+openai

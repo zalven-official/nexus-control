@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChatGPT, ChatMessage } from "./types";
 import Chat from "./components/chat";
+import { ping } from "@/services";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,19 @@ function App() {
     console.log(message);
     console.log(files);
   };
+
+  useEffect(() => {
+    const checkPing = async () => {
+      try {
+        const response = await ping();
+        console.log("Ping response:", response);
+      } catch (error) {
+        console.error("Ping failed:", error);
+      }
+    };
+
+    checkPing();
+  }, []);
 
   return (
     <Chat

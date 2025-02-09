@@ -1,4 +1,6 @@
 from injector import inject
+from langchain_openai import OpenAI
+
 
 class TextChatCompletion:
     @inject
