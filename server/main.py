@@ -32,4 +32,4 @@ def ping():
 if __name__ == "__main__":
     service_container.get_services()  # Ensure services are initialized once
     logging.info("Starting Eel app...")
-    eel.start("index.html", size=(800, 600))
+    eel.start("index.html",app_mode=False, size=(800, 600))

@@ -3,11 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": "22.13.1",
+    "pnpm": "10.2.1"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "watch:build": "vite build --watch"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",

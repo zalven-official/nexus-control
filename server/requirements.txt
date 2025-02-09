@@ -1,5 +1,6 @@
 eel
 injector
-langchain-openai
 langchain
+langchain-openai
 openai
+pre-commit

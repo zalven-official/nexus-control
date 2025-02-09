@@ -1,0 +1,20 @@
+{
+  "name": "companion",
+  "version": "1.0.0",
+  "description": "Companion AI",
+  "engines": {
+    "node": "22.13.1",
+    "pnpm": "10.2.1",
+    "python": "3.12.2"
+  },
+  "scripts": {
+    "postinstall": "cd client && pnpm install --frozen-lockfile && cd ../server && pip install -r requirements.txt",
+    "start": "concurrently \"cd client && pnpm run dev\" \"cd server && python3 main.py\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
