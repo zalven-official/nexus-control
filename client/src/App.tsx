@@ -1,36 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { ChatGPT, ChatMessage } from "./types";
+import Chat from "./components/chat";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(false);
+  const [chatGPTState, setChatGPTState] = useState<ChatGPT>({
+    model: "gpt-4-turbo",
+    messages: [],
+  });
+
+  const handleSubmit = (message: string, files: Array<File>) => {
+    setIsLoading(true);
+
+    const newMessage: ChatMessage = {
+      role: "user",
+      content: [{ type: "text", text: message }],
+    };
+
+    setChatGPTState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, newMessage],
+    }));
+
+    setIsLoading(false);
+    console.log(message);
+    console.log(files);
+  };
 
   return (
-    <>
-      <div>
-        <Button>Click me</Button>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Chat
+      chatGPTState={chatGPTState}
+      setChatGPTState={setChatGPTState}
+      submit={handleSubmit}
+      isLoading={isLoading}
+    />
+  );
 }
 
-export default App
+export default App;
