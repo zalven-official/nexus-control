@@ -6,4 +6,4 @@ class SpeechToText:
       pass
 
     def recognize(self, audio: str) -> str:
-        return f"STT: Recognized '{audio}'"
+        return f"STT: Recognized'{audio}'"

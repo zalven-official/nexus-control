@@ -7,3 +7,5 @@ pre-commit
 pyinstaller
 auto-py-to-exe
 eel[jinja2]
+pyinstaller-hooks-contrib
+watchdog

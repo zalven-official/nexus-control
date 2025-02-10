@@ -13,13 +13,15 @@ else:
 
 PyInstaller.__main__.run([
     'main.py',
-    '--console',
+    '--noconsole',
     '--noconfirm',
-    '--onefile',
+    '--onedir', # for codesign or notarization
     '--windowed',
     '--icon=' + icon,
     add_data_syntax,
     '--add-data=src:src',
     '--hidden-import=eel',
     '--hidden-import=pywebview'
+    '--target-architecture'
+    '--clean'
 ])

@@ -10,13 +10,13 @@
   "scripts": {
     "start": "concurrently \"pnpm run start:frontend\" \"pnpm run start:backend\"",
     "build": "pnpm run build:frontend && pnpm run build:backend",
-    "watch": "concurrently \"pnpm run watch:frontend\" \"pnpm run start:backend\"",
+    "dev": "concurrently \"pnpm run watch:frontend\" \"pnpm run start:backend\"",
     "postinstall": "cd client && pnpm install --frozen-lockfile && cd ../server && pip install -r requirements.txt",
     "start:frontend": "cd client && pnpm run dev",
-    "start:backend": "cd server && python3 main.py --app-mode False",
+    "start:backend": "cd server && python3 -m watchdog.watchmedo auto-restart --patterns='*.py' -- python3 main.py",
     "watch:frontend": "cd client && pnpm run watch:build",
     "build:frontend": "cd client && pnpm run build",
-    "build:backend": "pyinstaller --onefile --windowed --add-data 'server/web:web' ./server/main.py --icon ./server/src/assets/fav.ico"
+    "build:backend": "pyinstaller --noconsole --noconfirm --onefile --windowed --add-data 'server/web:web' --add-data 'server/src:src' server/main.py --icon server/src/assets/fav.ico"
   },
   "keywords": [],
   "author": "",

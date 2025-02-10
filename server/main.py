@@ -31,11 +31,11 @@ def ping():
     return "pong"
 
 parser = argparse.ArgumentParser(description="Eel GUI Application")
-parser.add_argument("--app-mode", type=bool, default=False, help="Enable or disable app mode")
+parser.add_argument("--app-mode", action="store_true", default=False, help="Enable app mode")
 args = parser.parse_args()
-
 
 if __name__ == "__main__":
     service_container.get_services()
-    logging.info("Starting Eel app...")
-    eel.start("index.html", app_mode=parser, size=(800, 600))
+    logging.info("Starting Eel apsp...")
+    print(args.app_mode)
+    eel.start("index.html", app_mode=args.app_mode, size=(800, 600))
