@@ -9,6 +9,9 @@
   },
   "scripts": {
     "postinstall": "cd client && pnpm install --frozen-lockfile && cd ../server && pip install -r requirements.txt",
+    "build": "pnpm run build:frontend && pnpm run build:backend",
+    "build:frontend": "cd client && pnpm run build",
+    "build:backend": "cd client && pnpm run build && cd ../server && pyinstaller --noconfirm --onedir --console --icon './src/assets/logo.svg' --add-data './web:web/' '../dist/' --workpath '../dist/core' --hidden-import 'timeit' --hidden-import 'bisect' --name companion './main.py'",
     "start": "concurrently \"cd client && pnpm run dev\" \"cd server && python3 main.py\""
   },
   "keywords": [],
