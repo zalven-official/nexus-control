@@ -1,8 +1,9 @@
 import eel
 import logging
 from src.dependency import service_container
+import argparse
 
-# Initialize Eel
+
 eel.init("web")
 
 @eel.expose
@@ -29,7 +30,12 @@ def vision_complete(image_data: str):
 def ping():
     return "pong"
 
+parser = argparse.ArgumentParser(description="Eel GUI Application")
+parser.add_argument("--app-mode", type=bool, default=False, help="Enable or disable app mode")
+args = parser.parse_args()
+
+
 if __name__ == "__main__":
-    service_container.get_services()  # Ensure services are initialized once
+    service_container.get_services()
     logging.info("Starting Eel app...")
-    eel.start("index.html",app_mode=False, size=(800, 600))
+    eel.start("index.html", app_mode=parser, size=(800, 600))
