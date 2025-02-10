@@ -6,3 +6,4 @@ openai
 pre-commit
 pyinstaller
 auto-py-to-exe
+eel[jinja2]
