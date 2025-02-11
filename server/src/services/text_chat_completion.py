@@ -9,5 +9,5 @@ class TextChatCompletion:
     def __init__(self, stt: SpeechToText):
         self.stt = stt
 
-    def chat(self, message: str) -> str:
+    def run(self, message: str) -> str:
         return f"Chat: '{message}'"
