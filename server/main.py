@@ -4,6 +4,7 @@ import logging
 import os
 
 import eel
+from src.types.chat_types import ChatMessageFormat
 from src.dependency import service_container
 
 
@@ -18,8 +19,8 @@ def speech_to_text(audio: str):
 
 
 @eel.expose
-def text_chat_completion(prompt: str):
-    return service_container.text_chat_completion.run(prompt)
+def text_chat_completion(message: ChatMessageFormat):
+    return service_container.text_chat_completion.run(message)
 
 
 @eel.expose

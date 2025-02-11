@@ -27,3 +27,6 @@ build
 ./dist
 main.spec
 *.spec
+
+.env
+.env.*

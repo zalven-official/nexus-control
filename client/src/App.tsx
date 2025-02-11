@@ -1,45 +1,35 @@
-import { useState, useEffect } from "react";
-import { ChatGPT, ChatMessage } from "./types";
+import { useState } from "react";
+import { ChatMessageFormat, ChatMessage } from "./types";
 import Chat from "./components/chat";
-import { ping } from "@/services";
+import { textChatCompletion } from "@/services";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [chatGPTState, setChatGPTState] = useState<ChatGPT>({
+  const [chatGPTState, setChatGPTState] = useState<ChatMessageFormat>({
     model: "gpt-4-turbo",
-    messages: [],
+    max_tokens: 2048,
+    messages: []
   });
 
-  const handleSubmit = (message: string, files: Array<File>) => {
-    setIsLoading(true);
-
-    const newMessage: ChatMessage = {
-      role: "user",
-      content: [{ type: "text", text: message }],
-    };
-
-    setChatGPTState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, newMessage],
-    }));
-
-    setIsLoading(false);
-    console.log(message);
-    console.log(files);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleSubmit = async (message: string, _files: Array<File>) => {
+    try {
+      setIsLoading(true);
+      const newMessage: ChatMessage = {
+        role: "user",
+        content: [{ type: "text", text: message }],
+      };
+      const updatedChatGPTState: ChatMessageFormat = {
+        ...chatGPTState,
+        messages: [...chatGPTState.messages, newMessage],
+      };
+      setChatGPTState(updatedChatGPTState);
+      const data: ChatMessageFormat = await textChatCompletion(updatedChatGPTState);
+      setChatGPTState(data);
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-  useEffect(() => {
-    const checkPing = async () => {
-      try {
-        const response = await ping();
-        console.log("Ping response:", response);
-      } catch (error) {
-        console.error("Ping failed:", error);
-      }
-    };
-
-    checkPing();
-  }, []);
 
   return (
     <Chat

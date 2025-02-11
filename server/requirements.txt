@@ -10,3 +10,9 @@ eel[jinja2]
 pyinstaller-hooks-contrib
 watchdog
 cx_Freeze
+langchain-community
+langchain-core
+langgraph
+langserve[all]
+langchain-cli
+langsmith

@@ -29,7 +29,7 @@ export interface ChatMessage {
   content: MessageContent[];
 }
 
-export interface ChatGPT {
+export interface ChatMessageFormat {
   model: string;
   messages: ChatMessage[];
   max_tokens?: number;
