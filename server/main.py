@@ -2,9 +2,7 @@ import eel
 import logging
 from src.dependency import service_container
 import argparse
-
-
-eel.init("web")
+import os
 
 @eel.expose
 def synthesize(text: str):
@@ -30,12 +28,18 @@ def vision_complete(image_data: str):
 def ping():
     return "pong"
 
-parser = argparse.ArgumentParser(description="Eel GUI Application")
-parser.add_argument("--app-mode", action="store_true", default=False, help="Enable app mode")
-args = parser.parse_args()
+def main():
+  
+
+    resource_path = os.path.join(os.path.dirname(__file__), 'web')
+    eel.init(resource_path)
+
+    logging.basicConfig(level=logging.INFO)
+    logging.info("Starting Eel app...")
+    logging.info(f"Web resource: {resource_path}")
+
+    eel.start("index.html", size=(800, 600))
 
 if __name__ == "__main__":
-    service_container.get_services()
-    logging.info("Starting Eel apsp...")
-    print(args.app_mode)
-    eel.start("index.html", app_mode=args.app_mode, size=(800, 600))
+    main()
+

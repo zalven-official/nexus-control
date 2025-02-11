@@ -9,3 +9,4 @@ auto-py-to-exe
 eel[jinja2]
 pyinstaller-hooks-contrib
 watchdog
+cx_Freeze
