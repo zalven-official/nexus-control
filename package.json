@@ -1,22 +1,21 @@
 {
-  "name": "companion",
+  "name": "nexus",
   "version": "1.0.0",
-  "description": "Companion AI",
+  "description": "Nexus AI",
   "engines": {
     "node": "22.13.1",
     "pnpm": "10.2.1",
     "python": "3.12.2"
   },
   "scripts": {
-    "start": "concurrently \"pnpm run start:frontend\" \"pnpm run start:backend\"",
+    "dev:frontend": "cd client && pnpm run watch:build",
+    "dev:backend": "cd server && python main.py",
     "build": "pnpm run build:frontend && pnpm run build:backend",
-    "dev": "concurrently \"pnpm run watch:frontend\" \"pnpm run start:backend\"",
-    "postinstall": "cd client && pnpm install --frozen-lockfile && cd ../server && pip install -r requirements.txt",
-    "start:frontend": "cd client && pnpm run dev",
-    "start:backend": "cd server && python3 -m watchdog.watchmedo auto-restart --patterns='*.py' -- python3 main.py",
-    "watch:frontend": "cd client && pnpm run watch:build",
     "build:frontend": "cd client && pnpm run build",
-    "build:backend": "pyinstaller --noconsole --noconfirm --onefile --windowed --add-data 'server/web:web' --add-data 'server/src:src' server/main.py --icon server/src/assets/fav.ico"
+    "build:backend": "node build-backend.js",
+    "build:backend:macos": "cd server && nuitka --standalone --macos-create-app-bundle --macos-app-icon=src/assets/fav.icns  --include-data-dir=web=web --include-data-dir=src=src  --output-dir=../dist --windows-uac-admin --disable-console --show-progress --show-modules main.py",
+    "build:backend:windows": "cd server && nuitka --standalone --windows-icon-from-ico=src/assets/fav.ico --include-data-dir=web=web --include-data-dir=src=src --output-dir=../dist --windows-uac-admin --windows-disable-console --show-progress --show-modules main.py",
+    "postinstall": "cd client && pnpm install --frozen-lockfile && cd ../server && pip install -r requirements.txt"
   },
   "keywords": [],
   "author": "",
