@@ -20,7 +20,8 @@ def speech_to_text(audio: str):
 
 @eel.expose
 def text_chat_completion(message: ChatMessageFormat):
-    return service_container.text_chat_completion.run(message)
+    # return service_container.text_chat_completion.run(message)
+    eel.add_numbers({'a': 2, 'b': 3})
 
 
 @eel.expose
@@ -31,7 +32,6 @@ def vision_chat_completion(image_data: str):
 @eel.expose
 def ping():
     return 'pong'
-
 
 def main():
 

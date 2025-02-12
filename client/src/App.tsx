@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChatMessageFormat, ChatMessage } from "./types";
 import Chat from "./components/chat";
-import { textChatCompletion } from "@/services";
+import { expose, textChatCompletion } from "@/services";
+
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,6 +12,14 @@ function App() {
     max_tokens: 2048,
     messages: []
   });
+
+
+  useEffect(() => {
+    if (window.eel) {
+      expose()
+    }
+  }, []);
+
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSubmit = async (message: string, _files: Array<File>) => {
